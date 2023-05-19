@@ -1,20 +1,82 @@
-﻿// Homework0518.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+﻿// HomeWork0518.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
 
 #include <iostream>
 
-int main()
+int NullCheck(char* _Arr)
 {
-    std::cout << "Hello World!\n";
+    int NullValue = 0;
+    if (sizeof(_Arr) == 0)
+    {
+        NullValue = 1;
+    }
+    return NullValue;
 }
 
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
+int StringCount(char* _Arr)
+{
+    int nc = NullCheck(_Arr);
+    int count = 0;
+    bool done = false;
+    if (nc == 1)
+    {
+        return 0;
+    }
 
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
+    char temp = _Arr[count];
+    while (temp != 0)
+    {
+        ++count;
+        temp = _Arr[count];
+    }
+    return count;
+
+}
+
+void ChangeCh(char* _Arr, char _PrevCh, char _NextCh)
+{
+    int nc = NullCheck(_Arr);
+    if (nc == 1)
+    {
+        return;
+    }
+    else
+    {
+        int len = StringCount(_Arr);
+        for (int i = 0; i < len; ++i)
+        {
+            char temp = _Arr[i];
+            if (temp == _PrevCh)
+            {
+                _Arr[i] = _NextCh;
+            }
+        }
+
+    }
+
+    return;
+}
+
+int main()
+{
+    // 한글 들어가지 않습니다.
+    {
+        char Arr[100] = "312312321";
+        // 3이 나와야 합니다.
+        int Result = StringCount(Arr);
+        int temp = Result;
+    }
+
+    {
+        char Arr[100] = "aaa bbb ccc";
+        // 3이 나와야 합니다.
+        // "aaa bbb ccc"; => "aaa bbb ddd";
+        ChangeCh(Arr, 'c', 'd');
+        Arr;
+        int a = 0;
+    }
+
+
+}
+
+// 어려웠던 점: [] index가 완되어서 이걸 처리하는 방법, char temp를 한다음 그걸 index 처음만 집어넣는게 좋은 방법인가"?
