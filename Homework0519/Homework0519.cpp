@@ -21,7 +21,7 @@ int ChCount(const char* const _string, char Ch)
     int Result = 0;
     while (_string[ChCount])
     {
-        if (_string[ChCount] == Ch);
+        if (_string[ChCount] == Ch)
         {
             Result += 1;
         }
@@ -37,17 +37,28 @@ int ChCount(const char* const _string, char Ch)
 
 void TrimDelete(char* _string)
 {
-    char Ch = 'a';
-    ' ';
-
-    //while ()
-    //{
-    if (Ch == ' ')
+    if (_string == nullptr)
     {
-        int a = 0;
+        return;
     }
-    //}
+    int count = 0;
 
+    while (_string[count] != 0)
+    {
+        while (_string[count] == ' ')
+        {
+            int space_count = count;
+            while (_string[space_count] != 0)
+            {
+                _string[space_count] = _string[space_count + 1];
+                ++space_count;
+
+            }
+
+        }
+        ++count;
+    }
+    
 
     return;
 }
@@ -55,17 +66,70 @@ void TrimDelete(char* _string)
 
 int DigitsCount(int _Number)
 {
-    return 0;
+    int divide_number = 10;
+    int count = 1;
+    while (_Number > 10)
+    {
+        _Number /= divide_number;
+        count += 1;
+    }
+    return count;
 }
 
 void StrCopy(const char* const _Left, char* _Right)
 {
+    if (_Left == nullptr)
+    {
+        return;
+    }
+    if (_Right == nullptr)
+    {
+        return;
+    }
+    for (size_t i = 0; _Left[i] != 0; ++i)
+    {
+        _Right[i] = _Left[i];
+    }
     return;
 }
 
 // 가장 어려운 숙제
 void NumberToString(int _Number, char* _Right)
 {
+    if (_Right == nullptr)
+    {
+        return;
+    }
+    int NumLen = DigitsCount(_Number);
+    int MaxNum = 1;
+    bool done = false;
+    int count = 0;
+    for (size_t i = 0; i < NumLen; ++i)
+    {
+        MaxNum *= 10;
+    }
+    while (MaxNum > 9)
+    {
+        MaxNum /= 10;
+        if (_Number > MaxNum)
+        { 
+            int Digit = _Number / MaxNum;
+            _Number %= MaxNum;
+            _Right[count] = Digit + 48;
+
+
+        }
+        else
+        {
+            _Right[count] = '0';
+        }
+        ++count;
+
+        
+
+    }
+    _Right[count + 1] = 0;
+
     return;
 }
 
@@ -75,7 +139,8 @@ int main()
     // 4가 리턴되어야 합니다.
     // 문자열의 마지막에 들어가는 0은 글자로 치지 않습니다.
     {
-        int Result = ChCount("ab aaa ccc ddd eee", 'w');
+        int Result = ChCount("ab aaa ccc ddd eee", 'e');
+        int a = 0;
     }
 
     {
@@ -89,7 +154,7 @@ int main()
 
     {
         // 8이 리턴되게 만들어라.
-        int Result = DigitsCount(100);
+        int Result = DigitsCount(87687678);
 
         int a = 0;
     }
@@ -107,7 +172,7 @@ int main()
 
         // Result = "312312";
 
-        NumberToString(312312, Result);
+        NumberToString(312, Result);
 
         char Ch = '0';
 
@@ -121,13 +186,4 @@ int main()
     std::cout << "Hello World!\n";
 }
 
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
+//  ArrCopyText 어려웠던점 _Right = _Left;이 불가능한 이유
