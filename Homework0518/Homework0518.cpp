@@ -3,22 +3,12 @@
 
 #include <iostream>
 
-int NullCheck(char* _Arr)
-{
-    int NullValue = 0;
-    if (sizeof(_Arr) == 0)
-    {
-        NullValue = 1;
-    }
-    return NullValue;
-}
 
 int StringCount(char* _Arr)
 {
-    int nc = NullCheck(_Arr);
     int count = 0;
     bool done = false;
-    if (nc == 1)
+    if (_Arr == nullptr)
     {
         return 0;
     }
@@ -35,15 +25,15 @@ int StringCount(char* _Arr)
 
 void ChangeCh(char* _Arr, char _PrevCh, char _NextCh)
 {
-    int nc = NullCheck(_Arr);
-    if (nc == 1)
+ 
+    if (_Arr == nullptr)
     {
         return;
     }
     else
     {
         int len = StringCount(_Arr);
-        for (int i = 0; i < len; ++i)
+        for (size_t i = 0; i < len; ++i)
         {
             char temp = _Arr[i];
             if (temp == _PrevCh)
@@ -64,7 +54,7 @@ int main()
         char Arr[100] = "312312321";
         // 3이 나와야 합니다.
         int Result = StringCount(Arr);
-        int temp = Result;
+        int a = 0;
     }
 
     {
