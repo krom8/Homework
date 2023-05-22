@@ -58,7 +58,7 @@ void TrimDelete(char* _string)
         }
         ++count;
     }
-    
+    // &sometyhing[count] something의 count번째에서 시작하는 pointer
 
     return;
 }
@@ -86,10 +86,11 @@ void StrCopy(const char* const _Left, char* _Right)
     {
         return;
     }
-    for (size_t i = 0; _Left[i] != 0; ++i)
-    {
-        _Right[i] = _Left[i];
-    }
+    //for (size_t i = 0; _Left[i] != 0; ++i)
+    //{
+    //    _Right[i] = _Left[i];
+    //}
+    *_Right = *_Left;
     return;
 }
 
@@ -145,6 +146,8 @@ int main()
 
     {
         char Arr[256] = "aa  b  c dd ee";
+
+
 
         TrimDelete(Arr);
 
