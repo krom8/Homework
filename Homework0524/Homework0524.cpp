@@ -135,8 +135,11 @@ public:
     }
 
     Player(const Player&) = delete;
+    
+    
 
-    void Input()
+
+void Input()
     {
         char Select = (char)_getch();
         int4 pos = GetPos();
