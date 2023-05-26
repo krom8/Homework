@@ -67,7 +67,8 @@ int main()
             MainPlayer.Input(&Screen);
         }
 
-        Sleep(200);
+
+        Sleep(300);
 
     }
 

@@ -56,7 +56,7 @@ bool ConsoleScreen::IsBarrier(const int4& _Pos) const
 {
     for (size_t i = 0; i < 10; ++i)
     {
-        if (this->Barriers[i] == _Pos)
+        if (Barriers[i] == _Pos)
         {
             return true;
         }
@@ -67,10 +67,6 @@ bool ConsoleScreen::IsBarrier(const int4& _Pos) const
         
 }
 
-void ConsoleScreen::ChangeBarrier(int i, int4 Pos)
-{
-    Barriers[i] = Pos;
-}
 
 void ConsoleScreen::Print() const
 {
@@ -96,10 +92,11 @@ void ConsoleScreen::SetGun(Player& _Player)
         int4 GS = _Player.GetGunPos();
         if (GS.Y >= 0)
         {
+            Destroy(_Player);
             SetPixel(GS, '^');
             GS.Y = GS.Y - 1;
             _Player.SetGunPos(GS);
-            Destroy(_Player);
+
         }
         if (GS.Y < 0)
         {
@@ -118,7 +115,7 @@ void ConsoleScreen::Destroy(Player& _Player)
     {
         if (Barriers[i] == GS)
         {
-           ChangeBarrier(i, int4({-1, -1}));
+            Barriers[i] = int4({ -1,-1 });
            break;
         }
     }

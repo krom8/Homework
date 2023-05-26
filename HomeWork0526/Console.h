@@ -14,8 +14,6 @@ public:
     void SetPixel(const int4& _Pos, char _Ch);
 
     void SetBarrier();
-    
-    void ChangeBarrier(int where, int4 Barrier);
 
     void SetGun(Player& _Player);
 
@@ -24,7 +22,6 @@ public:
     bool IsScreenOut(const int4& _Pos) const;
     
     bool IsBarrier(const int4& _Pos) const;
-
 
     void Print() const;
 

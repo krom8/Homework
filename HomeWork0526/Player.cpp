@@ -30,7 +30,10 @@ void Player::Input(ConsoleScreen* _Screen)
         break;
 
     case 'p':
-        Shoot(_Screen);
+        if (IsShoot == false)
+        {
+            Shoot(_Screen);
+        }
         break;
     default:
         break;
