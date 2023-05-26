@@ -1,4 +1,6 @@
 #include "Console.h"
+#include "InitialClass.h"
+#include "Player.h"
 
 
 void ConsoleScreen::Init(char _BaseCh)
@@ -61,8 +63,13 @@ bool ConsoleScreen::IsBarrier(const int4& _Pos) const
     }
      return false;
 
-    
+ 
         
+}
+
+void ConsoleScreen::ChangeBarrier(int i, int4 Pos)
+{
+    Barriers[i] = Pos;
 }
 
 void ConsoleScreen::Print() const
@@ -74,11 +81,46 @@ void ConsoleScreen::Print() const
     }
 }
 
-void ConsoleScreen::SetBarrier(int4* Barriers)
+void ConsoleScreen::SetBarrier()
 {
     for (size_t i = 0; i < 10; ++i)
     {
-        this->Barriers[i] = Barriers[i];
         SetPixel(Barriers[i], '0');
     }
+}
+
+void ConsoleScreen::SetGun(Player& _Player)
+{
+    if (_Player.GetShoot() == true)
+    {
+        int4 GS = _Player.GetGunPos();
+        if (GS.Y >= 0)
+        {
+            SetPixel(GS, '^');
+            GS.Y = GS.Y - 1;
+            _Player.SetGunPos(GS);
+            Destroy(_Player);
+        }
+        if (GS.Y < 0)
+        {
+            GS = { -1, -1 };
+            _Player.SetGunPos(GS);
+            _Player.SetShoot(false);
+        }
+
+    }
+}
+
+void ConsoleScreen::Destroy(Player& _Player)
+{
+    int4 GS = _Player.GetGunPos();
+    for (size_t i = 0; i < 10; ++i)
+    {
+        if (Barriers[i] == GS)
+        {
+           ChangeBarrier(i, int4({-1, -1}));
+           break;
+        }
+    }
+    
 }

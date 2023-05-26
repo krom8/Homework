@@ -1,40 +1,56 @@
 #include "Player.h"
-#include "Console.h"
-#include "InitialClass.h"
 #include <conio.h>
+
 
 void Player::Input(ConsoleScreen* _Screen)
 {
     char Select = (char)_getch();
-
     int4 MovePos = { 0, 0 };
 
     switch (Select)
     {
     case 'a':
         MovePos = Left;
+        Move(_Screen, MovePos);
         break;
 
     case 'd':
         MovePos = Right;
+        Move(_Screen, MovePos);
         break;
 
     case 'w':
         MovePos = Up;
+        Move(_Screen, MovePos);
         break;
 
     case 's':
         MovePos = Down;
+        Move(_Screen, MovePos);
         break;
 
+    case 'p':
+        Shoot(_Screen);
+        break;
     default:
         break;
     }
 
-    if (false == _Screen->IsScreenOut(this->GetPos() + MovePos) && false == _Screen->IsBarrier(this->GetPos() + MovePos))
+
+}
+
+void Player::Move(ConsoleScreen* _Screen, int4 MovePos)
+{
+    if (false == _Screen->IsScreenOut(GetPos() + MovePos) && false == _Screen->IsBarrier(GetPos() + MovePos))
     {
-        this->AddPos(MovePos);
+        AddPos(MovePos);
     }
 }
 
-    
+void Player::Shoot(ConsoleScreen* _Screen)
+{
+    IsShoot = true;
+    GunPos = GetPos();
+    GunPos.Y -= 1;
+    SetGunPos(GunPos);
+}

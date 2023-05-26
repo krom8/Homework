@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
 #include "InitialClass.h"
 #include "Console.h"
 #include "Player.h"
@@ -51,16 +52,22 @@ int main()
     // 클래스의경우에는 
     MainPlayer.SetPos({ 10, 5 });
 
-    int4 Barriers[10] = { {0,1}, {0,5}, {1,4}, {2,5}, {3,3}, {3,7}, {4,1}, {4,8}, {5,5}, {7,9} };
 
     while (true)
     {
 
+
         Screen.Clear();
         Screen.SetPixel(MainPlayer.GetPos(), 'a');
-        Screen.SetBarrier(Barriers);
+        Screen.SetBarrier();
+        Screen.SetGun(MainPlayer);
         Screen.Print();
-        MainPlayer.Input(&Screen);
+        if (0 != _kbhit())
+        {
+            MainPlayer.Input(&Screen);
+        }
+
+        Sleep(200);
 
     }
 
