@@ -188,7 +188,7 @@ int main()
 		// 프로그래밍에서는
 		// 어떤 클래스가 있을때 그걸 사용하는 모든 방법
 		// NewList.push_back
-		HList a = HList();
+		//HList a = NewList;
 		for (int i = 0; i < 10; i++)
 		{
 			NewList.push_back(i);
@@ -228,6 +228,9 @@ int main()
 }
 
 
-
+// Leak 난걸 잘 읽는 방법이 있냐?
 // ++EraseIter를 붙여가지고 두개씩 건너뛰었네
-// HList a = NewList;를 함으로써 ~HList를 할때 begin을 호출했음. StartNode에 NextNode가 당연히 없으니까 에러. 
+// HList a = NewList;를 함으로써 ~HList를 할때 begin을 호출했음. StartNode에 NextNode가 nullptr이니까 당연히 에러. 
+// <- 이런건 어떻게 예방을 하면 좋은가. begin과 같은 함수에서도 null처리? -> 합리적인 방법이 있는가? 선언만 하지 않는 습관?
+// 생성자는 함수를 호출하면 자동으로 호출되는가. HList NewList로 선언만 했을때는 호출 안되는거 같은데. 
+// HList NewList를 굳이 쓰는 이유가 있나? 써야하는 상황이 있나? 없으면 그냥 생성자 호출하면서 만들고 싶은데.
