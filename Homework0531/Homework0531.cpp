@@ -84,7 +84,7 @@ public:
 	{
 		if (nullptr != ArrPtr)
 		{
-			delete ArrPtr;
+			delete ArrPtr; // 베열을 하면 delete[]를 해야하는데 array는 delete를 해도 가능함.
 			ArrPtr = nullptr;
 		}
 	}
@@ -116,7 +116,8 @@ int main()
 
 
 		HVector<int> Arr0;
-		Arr0 = Arr;
+		Arr0 = Arr; // 같은 포인터를 가게 됨 shallow copy를 할뿐 delete한다고 100이였던 0이 되는게 아니라 heap에 있는 메모리가 사라지는것. 
+		            //dangling 프로블럼이 생긴다.
 
 		for (int i = 0; i < Arr0.size(); i++)
 		{
@@ -129,7 +130,8 @@ int main()
 
 }
 
-// 현재는 문제가 명확한 상황. 그런데 그렇지 않다는 상황을 가정하고 스택상에서 문제는 destructor에서 생겼는데 실질적인
+// 현재는 문제가 명확한 상황. 그런데 그렇지 않다는 상황을 가정하고 스택상에서 문제는 destructor에서 생김
+//  -> 지운걸 지웠던 이유 밖에 없는데 이거를 하나하나 확인 하는 수밖에 없다.
 // 문제는 operator=에 있는 상황. 이럴때 어떻게 대처를 해줘야하는지 모르겠다.
 // 첨에는 포인터 처리를 어떻게 해야하나
 // leak을 해결후 왜 에러가 났는지 잘 모르겠다. Default operator=가 어떻게 역할을 하는가?
