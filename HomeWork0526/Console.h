@@ -1,7 +1,6 @@
 #pragma once
 
 #include "InitialClass.h"
-#include "Player.h"
 #include <iostream>
 
 class Player;

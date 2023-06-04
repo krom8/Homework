@@ -1,7 +1,6 @@
 #pragma once
 
 #include "InitialClass.h"
-#include "Console.h"
 
 class ConsoleScreen;
 class Player
